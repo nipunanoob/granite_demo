@@ -33,7 +33,7 @@ class TasksController < ApplicationController
 
   def destroy
     if @task.destroy
-      render status: :ok, json: {notice : 'Succesfully deleted task 😎'}
+      render status: :ok, json: { notice: "Succesfully deleted task." }
     else
       render status: :unprocessable_entity,
         json: { error: @task.errors.full_messages.to_sentence }
