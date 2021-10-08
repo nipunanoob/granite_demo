@@ -12,6 +12,7 @@ module.exports = {
    * unless you're sure of it.
    */
   extends: [
+    "plugin:cypress/recommended",
     "plugin:json/recommended",
     "eslint:recommended",
     "plugin:react/recommended",
@@ -39,7 +40,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  parser: "babel-eslint",
+  // babel-eslint is deprecated now. This is the latest package.
+  parser: "@babel/eslint-parser",
   plugins: ["react", "prettier", "import", "react-hooks", "promise", "jam3"],
   rules: {
     // auto-fixable: Respect all Prettier rules and apply it.
@@ -52,11 +54,15 @@ module.exports = {
     "no-console": "error",
     // not-auto-fixable: require `return` statements to either always or never specify values.
     "consistent-return": "error",
-    // auto-fixable: require or disallow padding lines between statements. Helps maintain blank space after guard clauses etc.
+    // auto-fixable: sadly this doesn't support guard clauses yet.
     "padding-line-between-statements": [
       "error",
-      { blankLine: "always", prev: "var", next: "return" }
+      { blankLine: "always", prev: "if", next: ["if", "return"] }
     ],
+    // auto-fixable: Single line statements needn't have any braces. But in all other cases enforce curly braces.
+    curly: ["error", "multi-line"],
+    // auto-fixable: Remove the else part, if the "if" or "else-if" chain has a return statement
+    "no-else-return": "error",
     // not-auto-fixable: Prevent un-sanitized dangerouslySetInnerHTML.
     "jam3/no-sanitizer-with-danger": [
       2,
