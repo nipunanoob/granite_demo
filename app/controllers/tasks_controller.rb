@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :load_task, only: [:show, :update, :destroy]
 
   def show
-    render status: :ok, json: { task: @task, assigned_user: @task.assigned_user }
+    render
   end
 
   def index

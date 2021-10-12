@@ -2,5 +2,5 @@
 
 class User < ApplicationRecord
   has_many :assigned_tasks, foreign_key: :assigned_user_id, class_name: "Task"
-  validates :name, presence: true, length: { maximum: 35 }
+  validates :name, presence: true, length: { maximum: Constants::MAX_NAME_LENGTH }
 end
